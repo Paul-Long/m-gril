@@ -16,7 +16,7 @@ app.use(express.static(webpackConfig.output.path));
 app.get('*', (req, res) => {
   res.redirect('/');
 });
-const server = app.listen(8081, function () {
+const server = app.listen(2060, function () {
   const port = server.address().port;
   console.log("应用实例，访问地址为 http://localhost:%s", port)
 });

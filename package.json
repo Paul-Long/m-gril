@@ -1,10 +1,9 @@
 {
-  "name": "P-DEMO",
+  "name": "m-gril",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --color",
     "start": "better-npm-run start",
     "build:dev": "better-npm-run build:dev",
     "deploy": "better-npm-run deploy"
@@ -52,6 +51,7 @@
     "css-loader": "^0.28.4",
     "express": "^4.15.4",
     "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^0.11.2",
     "happypack": "^4.0.0-beta.2",
     "html-webpack-plugin": "^2.30.1",
     "less": "^2.7.2",
@@ -67,6 +67,7 @@
     "rimraf": "^2.6.1",
     "sortablejs": "^1.6.0",
     "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
     "webpack": "^3.5.5",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-dev-server": "^2.7.1",

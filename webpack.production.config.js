@@ -52,9 +52,9 @@ module.exports = {
       loaders: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
     }),
     new HtmlWebpackPlugin({
-      title: 'P-DEMO',
-      favicon: './app/styles/images/favicon.ico',
-      template: path.resolve(__dirname, 'index.html')
+      title: 'm-gril',
+      favicon: path.join(__dirname, 'src/server/static/images/favicon.ico'),
+      template: path.join(__dirname, 'src/server/template/index.html')
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',

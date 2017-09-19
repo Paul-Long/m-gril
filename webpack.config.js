@@ -11,7 +11,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 module.exports = {
   // devtool: 'eval-source-map',
   entry: {
-    main: ['webpack-hot-middleware/client?reload=true', path.join(__dirname, '/app/app.js')],
+    main: ['webpack-hot-middleware/client?reload=true', path.join(__dirname, 'src/client/app.js')],
     vendor: ['react', 'react-dom', 'react-router-dom']
   },
   output: {
@@ -24,7 +24,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        include: path.resolve(__dirname, './app'),
+        include: path.resolve(__dirname, './src/client'),
         use: 'happypack/loader?id=js'
       },
       {
@@ -33,6 +33,11 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader', 'less-loader']
         })
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        include: path.resolve(__dirname, './src/client'),
+        use: 'url-loader?limit=100&name=img/[name].[hash:8].[ext]'
       }
     ]
   },
@@ -44,7 +49,7 @@ module.exports = {
     new HappyPack({
       id: 'js',
       threadPool: happyThreadPool,
-      loaders: ['babel-loader?{"presets":["es2015","stage-0","react"],"plugins":[["import",{"libraryName":"antd","style":true}]]}'],
+      loaders: ['babel-loader'],
       cache: true
     }),
     new HappyPack({
@@ -54,9 +59,9 @@ module.exports = {
       cache: true
     }),
     new HtmlWebpackPlugin({
-      title: 'P-DEMO',
-      favicon: './app/styles/images/favicon.ico',
-      template: path.resolve(__dirname, 'index.html')
+      title: 'm-gril',
+      favicon: path.join(__dirname, 'src/server/static/images/favicon.ico'),
+      template: path.join(__dirname, 'src/server/template/index.html')
     }),
     new webpack.optimize.UglifyJsPlugin({
       mangle: true,
@@ -74,13 +79,5 @@ module.exports = {
     }),
     new webpack.optimize.OccurrenceOrderPlugin,
     new WebpackMd5Hash()
-  ],
-  devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
-    hot: true,
-    historyApiFallback: true,
-    inline: true,
-    port: 9090,
-    openPage: 'HOME'
-  }
+  ]
 };

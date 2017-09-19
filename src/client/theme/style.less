@@ -1,0 +1,40 @@
+@import "default";
+
+#app {
+  background-color: #F5F5F9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+@app: ~"@{ym}-app";
+.@{app} {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.@{app}-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 50px;
+  line-height: 50px;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+  li {
+    text-decoration: underline;
+    margin-left: 10px;
+  }
+}
+
+.@{app}-content {
+  width: 100%;
+  min-height: calc(~'100%' - 50px);
+  overflow: auto;
+}
