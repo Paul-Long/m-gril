@@ -1,5 +1,5 @@
 import React from 'react';
-import {browserHistory, BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
+import {browserHistory, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Bundle from './bundle';
 import App from '../containers/App';
 
@@ -11,24 +11,25 @@ class Routes extends React.Component {
       </Bundle>
     )
   };
+  route = (menu) => {
+    return (
+      <Route key={menu.path}
+             path={menu.path}
+             exact
+             component={(props) => this.renderComponent(props, menu.component)}
+      />)
+  };
 
   render() {
     const menus = [
-      {path: 'moment', name: '时光', component: 'Moment', exact: true}
+      {path: '/', name: '时刻', component: 'Moment'},
+      {path: '/video', name: '时光', component: 'Video'}
     ];
     return (
       <Router history={browserHistory}>
         <App menus={menus}>
-          <Redirect from='/' to='moment' />
           <Switch>
-            {menus.map(m => {
-              return (
-                <Route key={m.path}
-                       exact={!!m.exact}
-                       path={`/${m.path}`}
-                       component={(props) => this.renderComponent(props, m.component)}
-                />)
-            })}
+            {menus.map(this.route)}
           </Switch>
         </App>
       </Router>

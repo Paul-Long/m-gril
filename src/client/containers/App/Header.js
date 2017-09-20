@@ -2,14 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import logo from '../../theme/images/logo.png';
+import {shouldUpdate} from '../../util/reactUtil';
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: '/'
+    }
+  }
+
   static propTypes = {
     menus: PropTypes.array
   };
   static defaultProps = {
     menus: []
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return shouldUpdate.apply(this, arguments);
+  }
+
   render() {
     const {menus = []} = this.props;
     return (
@@ -18,7 +31,10 @@ class Header extends React.Component {
         <ul className='ym-app-ul'>
           {menus.map(m => (
             <li key={m.path}>
-              <Link to={`/${m.path}`}>{m.name}</Link>
+              <Link className={this.state.active === m.path ? 'active' : ''}
+                    to={m.path}
+                    onClick={() => this.setState({active: m.path})}
+              >{m.name}</Link>
             </li>)
           )}
         </ul>

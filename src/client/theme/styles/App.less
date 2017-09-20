@@ -1,11 +1,11 @@
 #app {
-  background-color: #F5F5F9;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   overflow: hidden;
+  background-color: white;
 }
 
 @app: ~"@{ym}-app";
@@ -15,6 +15,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  max-width: @max-width;
+  margin: 0 auto;
 }
 
 .@{app}-header {
@@ -28,6 +30,7 @@
   .@{ym}-logo {
     width: 250px;
     height: 150px;
+    opacity: 0.5;
   }
   .@{app}-ul {
     display: flex;
@@ -41,16 +44,21 @@
       list-style-type: none;
       margin-left: 10px;
       a {
+        text-decoration: none;
         color: #999999;
         font-family: @en-font-family;
+      }
+      .active {
+        color: #111111;
       }
     }
   }
 }
 
 .@{app}-content {
-  width: 100%;
-  min-height: calc(~'100%' - 200px);
+  width: calc(~'100%' - 100px);
+  min-height: calc(~'100%' - 300px);
   overflow: auto;
   background-color: white;
+  padding: 50px;
 }
