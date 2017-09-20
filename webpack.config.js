@@ -12,12 +12,18 @@ module.exports = {
   // devtool: 'eval-source-map',
   entry: {
     main: ['webpack-hot-middleware/client?reload=true', path.join(__dirname, 'src/client/app.js')],
-    vendor: ['react', 'react-dom', 'react-router-dom']
+    vendor: ['preact', 'react-router-dom']
   },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[chunkhash:8].[id].js',
     publicPath: '/'
+  },
+  resolve: {
+    alias: {
+      'react': 'preact-compat',
+      'react-dom': 'preact-compat',
+    }
   },
   module: {
     rules: [
