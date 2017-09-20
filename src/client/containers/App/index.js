@@ -1,18 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Header from './Header';
 import '../../theme/style.less';
 
 class App extends React.Component {
-  static propTypes = {
-    menus: PropTypes.array
-  };
-  static defaultProps = {
-    menus: []
-  };
-
-  render() {
-    const {menus = [], children} = this.props;
+  render(props) {
+    const {menus = [], children} = props;
     return (
       <div className='ym-app'>
         <Header menus={menus} />

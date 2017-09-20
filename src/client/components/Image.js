@@ -1,27 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class Image extends React.Component {
-  static propTypes = {
-    src: PropTypes.string,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-  };
-
-  render() {
-    const {width, height} = this.props;
-    const props = {
+  render(props) {
+    const {width, height} = props;
+    const imgProps = {
       src: src
     };
     if (width) {
-      props.width = width;
+      imgProps.width = width;
     }
     if (height) {
-      props.height = height;
+      imgProps.height = height;
     }
     return (
       <div className='ym-image'>
-        {src && <img {...props} />}
+        {src && <img {...imgProps} />}
       </div>
     )
   }

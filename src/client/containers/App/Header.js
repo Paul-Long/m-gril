@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import logo from '../../theme/images/logo.png';
 import {shouldUpdate} from '../../util/reactUtil';
@@ -12,19 +11,12 @@ class Header extends React.Component {
     }
   }
 
-  static propTypes = {
-    menus: PropTypes.array
-  };
-  static defaultProps = {
-    menus: []
-  };
-
   shouldComponentUpdate(nextProps, nextState) {
     return shouldUpdate.apply(this, arguments);
   }
 
-  render() {
-    const {menus = []} = this.props;
+  render(props) {
+    const {menus = []} = props;
     return (
       <div className='ym-app-header'>
         <img className='ym-logo' src={logo} />
