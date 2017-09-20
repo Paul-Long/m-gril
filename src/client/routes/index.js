@@ -14,12 +14,12 @@ class Routes extends React.Component {
 
   render() {
     const menus = [
-      {path: 'HOME', component: 'Home', exact: true}
+      {path: 'moment', name: '时光', component: 'Moment', exact: true}
     ];
     return (
       <Router history={browserHistory}>
         <App menus={menus}>
-          <Redirect from='/' to='HOME' />
+          <Redirect from='/' to='moment' />
           <Switch>
             {menus.map(m => {
               return (

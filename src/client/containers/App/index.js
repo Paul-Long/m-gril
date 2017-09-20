@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
-import logo from '../../theme/images/logo.png';
+import Header from './Header';
 import '../../theme/style.less';
 
 class App extends React.Component {
@@ -16,15 +15,10 @@ class App extends React.Component {
     const {menus = [], children} = this.props;
     return (
       <div className='ym-app'>
-        <img src={logo} width={250} height={60} />
-        <ul className='ym-app-header'>
-          {menus.map(m => (
-            <li key={m.path}>
-              <Link to={`/${m.path}`}>{m.path}</Link>
-            </li>)
-          )}
-        </ul>
-        {children}
+        <Header menus={menus} />
+        <div className='ym-app-content'>
+          {children}
+        </div>
       </div>
     )
   }

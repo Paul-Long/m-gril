@@ -1,0 +1,56 @@
+#app {
+  background-color: #F5F5F9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+@app: ~"@{ym}-app";
+.@{app} {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.@{app}-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  height: 200px;
+  padding-left: 50px;
+  padding-right: 50px;
+  .@{ym}-logo {
+    width: 250px;
+    height: 150px;
+  }
+  .@{app}-ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    li {
+      text-decoration: none;
+      list-style-type: none;
+      margin-left: 10px;
+      a {
+        color: #999999;
+        font-family: @en-font-family;
+      }
+    }
+  }
+}
+
+.@{app}-content {
+  width: 100%;
+  min-height: calc(~'100%' - 200px);
+  overflow: auto;
+  background-color: white;
+}
