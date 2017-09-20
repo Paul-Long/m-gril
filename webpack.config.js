@@ -49,14 +49,12 @@ module.exports = {
     new HappyPack({
       id: 'js',
       threadPool: happyThreadPool,
-      loaders: ['babel-loader'],
-      cache: true
+      loaders: ['babel-loader']
     }),
     new HappyPack({
       id: 'styles',
       threadPool: happyThreadPool,
-      loaders: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader'],
-      cache: true
+      loaders: ['style-loader', 'css-loader', 'less-loader', 'postcss-loader']
     }),
     new HtmlWebpackPlugin({
       title: 'm-gril',
