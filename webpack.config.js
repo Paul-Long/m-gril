@@ -58,7 +58,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'm-gril',
-      favicon: path.join(__dirname, 'src/server/static/images/favicon.ico'),
+      favicon: './src/server/static/images/favicon.ico',
       template: path.join(__dirname, 'src/server/template/index.html')
     }),
     new webpack.optimize.UglifyJsPlugin({
