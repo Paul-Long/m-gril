@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const os = require('os');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HappyPack = require('happypack');
 const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
@@ -13,12 +12,18 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 module.exports = {
   entry: {
     main: path.join(__dirname, '/app/app.js'),
-    vendor: ['react', 'react-dom', 'react-router-dom']
+    vendor: ['preact', 'react-router-dom']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[chunkhash:8].[id].js',
     publicPath: '/'
+  },
+  resolve: {
+    alias: {
+      'react': 'preact-compat',
+      'react-dom': 'preact-compat',
+    }
   },
   module: {
     rules: [
