@@ -11,8 +11,8 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 module.exports = {
   entry: {
-    main: path.join(__dirname, '/app/app.js'),
-    vendor: ['preact', 'react-router-dom']
+    main: path.join(__dirname, 'src/client/app.js'),
+    vendor: ['preact', 'preact-compat', 'preact-router', 'preact-async-route']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -30,7 +30,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        include: path.resolve(__dirname, './app'),
+        include: path.resolve(__dirname, './src/client'),
         use: 'happypack/loader?id=js'
       },
       {
@@ -39,6 +39,11 @@ module.exports = {
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader', 'less-loader']
         })
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        include: path.resolve(__dirname, './src/client'),
+        use: 'url-loader?limit=100&name=img/[name].[hash:8].[ext]'
       }
     ]
   },
@@ -49,7 +54,7 @@ module.exports = {
     new HappyPack({
       id: 'js',
       threadPool: happyThreadPool,
-      loaders: ['babel-loader'],
+      loaders: ['babel-loader']
     }),
     new HappyPack({
       id: 'styles',
@@ -59,7 +64,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'm-gril',
       favicon: path.join(__dirname, 'src/server/static/images/favicon.ico'),
-      template: path.join(__dirname, 'src/server/template/index.html')
+      template: path.join(__dirname, 'src/server/template/index.html'),
+      chunks: ['manifest', 'vendor', 'common', 'main'],
+      chunksSortMode: function (chunk1, chunk2) {
+        const order = ['manifest', 'vendor', 'common', 'main'];
+        const order1 = order.indexOf(chunk1.names[0]);
+        const order2 = order.indexOf(chunk2.names[0]);
+        return order1 - order2;
+      }
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',

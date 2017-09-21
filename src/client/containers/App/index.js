@@ -1,8 +1,8 @@
-import React from 'react';
+import {Component} from 'preact';
 import Header from './Header';
 import '../../theme/style.less';
 
-class App extends React.Component {
+class App extends Component {
   render(props) {
     const {menus = [], children} = props;
     return (

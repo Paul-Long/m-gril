@@ -1,9 +1,9 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import {Component} from 'preact';
+import {Link} from 'preact-router/match';
 import logo from '../../theme/images/logo.png';
 import {shouldUpdate} from '../../util/reactUtil';
 
-class Header extends React.Component {
+class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,9 +23,8 @@ class Header extends React.Component {
         <ul className='ym-app-ul'>
           {menus.map(m => (
             <li key={m.path}>
-              <Link className={this.state.active === m.path ? 'active' : ''}
-                    to={m.path}
-                    onClick={() => this.setState({active: m.path})}
+              <Link activeClassName='active'
+                    href={m.path}
               >{m.name}</Link>
             </li>)
           )}

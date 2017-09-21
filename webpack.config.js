@@ -12,7 +12,7 @@ module.exports = {
   // devtool: 'eval-source-map',
   entry: {
     main: ['webpack-hot-middleware/client?reload=true', path.join(__dirname, 'src/client/app.js')],
-    vendor: ['preact', 'react-router-dom']
+    vendor: ['preact']
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -65,7 +65,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'm-gril',
       favicon: './src/server/static/images/favicon.ico',
-      template: path.join(__dirname, 'src/server/template/index.html')
+      template: path.join(__dirname, 'src/server/template/index.html'),
+      chunks: ['manifest', 'vendor', 'common', 'main'],
+      chunksSortMode: 'dependency'
     }),
     new webpack.optimize.UglifyJsPlugin({
       mangle: true,

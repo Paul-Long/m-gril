@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDom from 'react-dom';
+import {render} from 'preact';
 import Routes from './routes';
 
-ReactDom.render((<Routes />), document.getElementById('app'));
+render((<Routes />), document.getElementById('app'));

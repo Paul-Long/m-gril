@@ -1,23 +1,17 @@
 import React from 'react';
-import {browserHistory, BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Bundle from './bundle';
+import {Router} from 'preact-router';
+import AsyncRoute from 'preact-async-route';
 import App from '../containers/App';
 
 class Routes extends React.Component {
-  renderComponent = (props, component) => {
-    return (
-      <Bundle load={() => import(`../containers/${component}/index.js`)}>
-        {(COM) => <COM {...props} />}
-      </Bundle>
-    )
-  };
   route = (menu) => {
     return (
-      <Route key={menu.path}
-             path={menu.path}
-             exact
-             component={(props) => this.renderComponent(props, menu.component)}
-      />)
+      <AsyncRoute
+        key={menu.path}
+        path={menu.path}
+        getComponent={() => import(`../containers/${menu.component}/index.js`).then(module => module.default)}
+      />
+    );
   };
 
   render() {
@@ -26,13 +20,11 @@ class Routes extends React.Component {
       {path: '/video', name: '时光', component: 'Video'}
     ];
     return (
-      <Router history={browserHistory}>
-        <App menus={menus}>
-          <Switch>
-            {menus.map(this.route)}
-          </Switch>
-        </App>
-      </Router>
+      <App menus={menus}>
+        <Router>
+          {menus.map(this.route)}
+        </Router>
+      </App>
     )
   }
 }
