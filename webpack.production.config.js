@@ -9,7 +9,7 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const UglifyJsParallelPlugin = require('webpack-uglify-parallel');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
-module.exports = {
+const config = {
   entry: {
     main: path.join(__dirname, 'src/client/app.js'),
     vendor: ['preact', 'preact-compat', 'preact-router', 'preact-async-route']
@@ -99,3 +99,9 @@ module.exports = {
     })
   ]
 };
+const isTest = false;
+if (isTest) {
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+  config.plugins.push(new BundleAnalyzerPlugin());
+}
+module.exports = config;
