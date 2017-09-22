@@ -7,10 +7,15 @@ class Button extends React.Component {
     let typeClass = `ym-btn-${type}`;
     return classNames('ym-btn', className, typeClass);
   };
+  onClick = (e) => {
+    const {onClick} = this.props;
+    (typeof onClick === 'function') && onClick(e);
+  };
   render() {
     const {children} = this.props;
     const props = {
-      className: this.getClassName()
+      className: this.getClassName(),
+      onClick: this.onClick
     };
     return (
       <button {...props}>

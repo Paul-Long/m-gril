@@ -1,18 +1,20 @@
 const webpack = require('webpack');
 const path = require('path');
-const os = require('os');
+const cpus = require('os').cpus().length;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HappyPack = require('happypack');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
+const happyThreadPool = HappyPack.ThreadPool({size: cpus});
+const UglifyParallel = require('webpack-uglify-parallel');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
+const ENV = process.env.NODE_ENV;
 const client = 'src/client';
 const config = {
   entry: {
-    vendor: ['preact'],
-    main: path.join(__dirname, 'src/client/app.js')
+    main: path.join(__dirname, 'src/client/app.js'),
+    vendor: ['preact']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -84,21 +86,20 @@ const config = {
     new webpack.optimize.OccurrenceOrderPlugin,
     new WebpackMd5Hash(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(ENV)
     })
   ]
 };
-const ENV = process.env.NODE_ENV;
 if (ENV === 'develpoment') {
-  config.plugins.push(new webpack.HotModuleReplacementPlugin());
   config.devtool = 'eval-source-map';
   config.entry.main = ['webpack-hot-middleware/client?reload=true', path.join(__dirname, 'src/client/app.js')];
   config.output.path = path.resolve(__dirname, 'build');
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 
 if (ENV === 'production') {
-  const UglifyJs = new require('webpack-uglify-parallel')({
-    workers: os.cpus().length,
+  const UglifyJs = new UglifyParallel({
+    workers: cpus,
     mangle: true,
     compressor: {
       warnings: false,
