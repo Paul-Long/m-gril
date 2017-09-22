@@ -12,7 +12,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const config = {
   entry: {
     main: path.join(__dirname, 'src/client/app.js'),
-    vendor: ['preact', 'preact-compat', 'preact-router', 'preact-async-route']
+    vendor: ['preact']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -67,7 +67,7 @@ const config = {
       template: path.join(__dirname, 'src/server/template/index.html'),
       chunks: ['manifest', 'vendor', 'common', 'main'],
       chunksSortMode: function (chunk1, chunk2) {
-        const order = ['manifest', 'vendor', 'common', 'main'];
+        const order = ['manifest', 'common', 'vendor', 'main'];
         const order1 = order.indexOf(chunk1.names[0]);
         const order2 = order.indexOf(chunk2.names[0]);
         return order1 - order2;

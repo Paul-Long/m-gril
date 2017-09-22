@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {h} from 'react';
 import {Router} from 'preact-router';
 import AsyncRoute from 'preact-async-route';
 import App from '../containers/App';

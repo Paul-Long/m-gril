@@ -1,6 +1,6 @@
-import {Component} from 'preact';
+import React, {h} from 'react';
 
-class Image extends Component {
+class Image extends React.Component {
   render(props) {
     const {width, height} = props;
     const imgProps = {

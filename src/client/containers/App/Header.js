@@ -1,9 +1,9 @@
-import {Component} from 'preact';
+import React, {h} from 'react';
 import {Link} from 'preact-router/match';
 import logo from '../../theme/images/logo.png';
 import {shouldUpdate} from '../../util/reactUtil';
 
-class Header extends Component {
+class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

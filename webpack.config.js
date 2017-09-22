@@ -9,7 +9,7 @@ const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 module.exports = {
-  // devtool: 'eval-source-map',
+  devtool: 'eval-source-map',
   entry: {
     main: ['webpack-hot-middleware/client?reload=true', path.join(__dirname, 'src/client/app.js')],
     vendor: ['preact']
@@ -67,7 +67,12 @@ module.exports = {
       favicon: './src/server/static/images/favicon.ico',
       template: path.join(__dirname, 'src/server/template/index.html'),
       chunks: ['manifest', 'vendor', 'common', 'main'],
-      chunksSortMode: 'dependency'
+      chunksSortMode: function (chunk1, chunk2) {
+        const order = ['manifest', 'common', 'vendor', 'main'];
+        const order1 = order.indexOf(chunk1.names[0]);
+        const order2 = order.indexOf(chunk2.names[0]);
+        return order1 - order2;
+      }
     }),
     new webpack.optimize.UglifyJsPlugin({
       mangle: true,

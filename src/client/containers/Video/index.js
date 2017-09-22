@@ -1,6 +1,6 @@
-import {Component} from 'preact';
+import React, {h} from 'react';
 
-class Video extends Component {
+class Video extends React.Component {
   render() {
     return (
       <div className='ym-video'>
