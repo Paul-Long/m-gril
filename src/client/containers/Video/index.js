@@ -1,5 +1,5 @@
 import React, {h} from 'react';
-import {Button} from 'components';
+import Button from 'components/Button';
 
 class Video extends React.Component {
   render() {

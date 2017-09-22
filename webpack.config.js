@@ -109,7 +109,7 @@ if (ENV === 'production') {
   });
   config.plugins.push(UglifyJs);
 
-  const isTest = false;
+  const isTest = true;
   if (isTest) {
     const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
     config.plugins.push(new BundleAnalyzerPlugin());
