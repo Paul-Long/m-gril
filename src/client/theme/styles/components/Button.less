@@ -1,0 +1,49 @@
+@btn: ~"ym-btn";
+
+.button-size(@height; @padding; @font-size; @border-radius) {
+  padding: @padding;
+  font-size: @font-size;
+  border-radius: @border-radius;
+  height: @height;
+}
+
+.@{btn} {
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  line-height: 1.15;
+  font-size: 12px;
+  border-radius: 4px;
+  height: 28px;
+  white-space: nowrap;
+  user-select: none;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  font-weight: @btn-font-weight;
+  border: @border-width-base @border-style-base transparent;
+  .button-size(@btn-height-base; @btn-padding-base; @font-size-base; @btn-border-radius-base);
+  transition: all .3s @ease-in-out;
+  &, &:active, &:focus {
+    outline: 0;
+  }
+  &:hover {
+    color: #108ee9;
+    background-color: #fff;
+    border-color: #108ee9;
+  }
+  &:active {
+  }
+  &-lg {
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    height: 32px;
+  }
+  &-sm {
+    padding: 0 7px;
+    font-size: 12px;
+    border-radius: 4px;
+    height: 22px;
+  }
+}

@@ -1,5 +1,5 @@
 import React, {h} from 'react';
-import {Image} from '../../components';
+import {Image, Pagination} from '../../components';
 
 class Moment extends React.Component {
   renderImage = () => {
@@ -8,7 +8,10 @@ class Moment extends React.Component {
   render() {
     return (
       <div className='ym-moment'>
-        {this.renderImage()}
+        <div className='ym-moment-content'>
+          {this.renderImage()}
+        </div>
+        <Pagination />
       </div>
     )
   }

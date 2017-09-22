@@ -8,6 +8,7 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
+console.log(path.resolve(__dirname, 'src', 'components'));
 module.exports = {
   devtool: 'eval-source-map',
   entry: {
@@ -23,6 +24,7 @@ module.exports = {
     alias: {
       'react': 'preact-compat',
       'react-dom': 'preact-compat',
+      'components': path.resolve(__dirname, 'src/client', 'components')
     }
   },
   module: {
