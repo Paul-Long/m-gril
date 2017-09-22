@@ -16,7 +16,7 @@
       }
     },
     "deploy": {
-      "command": "rimraf dist && webpack --config ./webpack.production.config.js",
+      "command": "rimraf dist && webpack --config ./webpack.config.js",
       "env": {
         "NODE_ENV": "production"
       }

@@ -8,15 +8,14 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length});
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
-console.log(path.resolve(__dirname, 'src', 'components'));
-module.exports = {
-  devtool: 'eval-source-map',
+const client = 'src/client';
+const config = {
   entry: {
-    main: ['webpack-hot-middleware/client?reload=true', path.join(__dirname, 'src/client/app.js')],
-    vendor: ['preact']
+    vendor: ['preact'],
+    main: path.join(__dirname, 'src/client/app.js')
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].[chunkhash:8].[id].js',
     publicPath: '/'
   },
@@ -24,7 +23,10 @@ module.exports = {
     alias: {
       'react': 'preact-compat',
       'react-dom': 'preact-compat',
-      'components': path.resolve(__dirname, 'src/client', 'components')
+      'components': path.resolve(__dirname, client, 'components'),
+      'util': path.resolve(__dirname, client, 'util'),
+      'theme': path.resolve(__dirname, client, 'theme'),
+      'containers': path.resolve(__dirname, client, 'containers')
     }
   },
   module: {
@@ -34,15 +36,13 @@ module.exports = {
         exclude: /node_modules/,
         include: path.resolve(__dirname, './src/client'),
         use: 'happypack/loader?id=js'
-      },
-      {
+      }, {
         test: /\.(css|less)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader', 'less-loader']
         })
-      },
-      {
+      }, {
         test: /\.(png|jpe?g|gif)$/,
         include: path.resolve(__dirname, './src/client'),
         use: 'url-loader?limit=100&name=img/[name].[hash:8].[ext]'
@@ -53,7 +53,6 @@ module.exports = {
     new CaseSensitivePathsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin('[name].[contenthash:8].css', {allChunks: true}),
-    new webpack.HotModuleReplacementPlugin(),
     new HappyPack({
       id: 'js',
       threadPool: happyThreadPool,
@@ -76,21 +75,43 @@ module.exports = {
         return order1 - order2;
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: true,
-      compress: {warnings: false},
-      output: {comments: false}
-    }),
     new webpack.optimize.CommonsChunkPlugin({name: 'common', chunks: ['main', 'vendor']}),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       filename: 'manifest.[hash:8].[id].js',
       minChunks: Infinity
     }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
-    }),
     new webpack.optimize.OccurrenceOrderPlugin,
-    new WebpackMd5Hash()
+    new WebpackMd5Hash(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
   ]
 };
+const ENV = process.env.NODE_ENV;
+if (ENV === 'develpoment') {
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
+  config.devtool = 'eval-source-map';
+  config.entry.main = ['webpack-hot-middleware/client?reload=true', path.join(__dirname, 'src/client/app.js')];
+  config.output.path = path.resolve(__dirname, 'build');
+}
+
+if (ENV === 'production') {
+  const UglifyJs = new require('webpack-uglify-parallel')({
+    workers: os.cpus().length,
+    mangle: true,
+    compressor: {
+      warnings: false,
+      drop_console: true,
+      drop_debugger: true
+    }
+  });
+  config.plugins.push(UglifyJs);
+
+  const isTest = false;
+  if (isTest) {
+    const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+    config.plugins.push(new BundleAnalyzerPlugin());
+  }
+}
+module.exports = config;

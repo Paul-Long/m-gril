@@ -1,6 +1,6 @@
 import React, {h} from 'react';
 import Header from './Header';
-import '../../theme/style.less';
+import 'theme/style.less';
 
 class App extends React.Component {
   render(props) {

@@ -1,7 +1,7 @@
 import React, {h} from 'react';
 import {Router} from 'preact-router';
 import AsyncRoute from 'preact-async-route';
-import App from '../containers/App';
+import App from 'containers/App';
 
 class Routes extends React.Component {
   route = (menu) => {

@@ -1,5 +1,5 @@
 import React, {h} from 'react';
-import {Image, Pagination} from '../../components';
+import {Image, Pagination} from 'components';
 
 class Moment extends React.Component {
   renderImage = () => {
