@@ -48,6 +48,10 @@ const config = {
         test: /\.(png|jpe?g|gif)$/,
         include: path.resolve(__dirname, './src/client'),
         use: 'url-loader?limit=100&name=img/[name].[hash:8].[ext]'
+      }, {
+        test: /\.(ttf)$/,
+        include: path.resolve(__dirname, './src/client'),
+        use: 'url-loader?limit=100&name=fonts/[name].[hash:8].[ext]'
       }
     ]
   },

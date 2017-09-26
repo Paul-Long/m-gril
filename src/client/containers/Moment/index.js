@@ -4,7 +4,7 @@ import Pagination from 'components/Pagination';
 
 class Moment extends React.Component {
   renderImage = () => {
-    return [1, 2, 3, 4, 5, 6, 7].map((i) => (<Image key={i} width={200} height={200} />))
+    return [1, 2, 3, 4, 5, 6, 7].map((i) => (<Image key={i} />))
   };
   render() {
     return (

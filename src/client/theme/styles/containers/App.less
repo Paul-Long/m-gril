@@ -8,6 +8,7 @@
   background-color: white;
 }
 
+@app-content-height: calc(~"100%" - 300px);
 @app: ~"@{ym}-app";
 .@{app} {
   position: relative;
@@ -47,6 +48,8 @@
         text-decoration: none;
         color: #999999;
         font-family: @en-font-family;
+        min-width: 60px;
+        display: block;
       }
       .active {
         color: #111111;
@@ -57,7 +60,8 @@
 
 .@{app}-content {
   width: calc(~'100%' - 100px);
-  min-height: calc(~'100%' - 300px);
+  height: @app-content-height;
+  min-height: @app-content-height;
   overflow: auto;
   background-color: white;
   padding: 50px;
