@@ -13,7 +13,7 @@ class Image extends React.Component {
       imgProps.height = height;
     }
     return (
-      <div className='ym-image'>
+      <div className='ym-image' onClick={this.props.onClick}>
         {src && <img {...imgProps} />}
       </div>
     )

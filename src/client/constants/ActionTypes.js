@@ -1,0 +1,1 @@
+export const MASK_SHOW = 'MASK_SHOW';
