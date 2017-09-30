@@ -3,3 +3,27 @@
   flex-direction: row;
   align-items: center;
 }
+
+.ym-size {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.ym-fixed {
+  position: fixed;
+  .ym-size;
+}
+
+.ym-absolute {
+  position: absolute;
+  .ym-size;
+}
+
+.ym-flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

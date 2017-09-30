@@ -8,17 +8,18 @@
   bottom: 0;
   overflow: hidden;
   z-index: @mask-index;
-  opacity: 0.5;
-  background-color: #111111;
+  background-color: rgba(17, 17, 17, 0.5);
   &-content {
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 5%;
+    left: 5%;
     right: 0;
     bottom: 0;
     overflow: hidden;
-    opacity: 1;
-    background-color: white;
+    background-color: transparent;
     z-index: @mask-content-index;
+    .ym-flex-center;
+    max-width: 90%;
+    max-height: 90%;
   }
 }
