@@ -1,6 +1,7 @@
 import React, {h} from 'react';
 import Image from 'components/Image';
 import Pagination from 'components/Pagination';
+import Button from 'components/Button';
 import ImageView from './ImageView';
 import {shouldUpdate} from 'util/reactUtil';
 
@@ -31,6 +32,9 @@ class Moment extends React.Component {
     const {showView} = state;
     return (
       <div className='ym-moment'>
+        <div className='ym-moment-header'>
+          <Button type='primary'>上传</Button>
+        </div>
         <div className='ym-moment-content'>
           {this.renderImage()}
         </div>
