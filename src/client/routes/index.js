@@ -16,7 +16,8 @@ class Routes extends React.Component {
 
   render() {
     const menus = [
-      {path: '/', name: '时刻', component: 'Moment'},
+      {path: '/', name: '首页', component: 'Home'},
+      {path: '/moment', name: '时刻', component: 'Moment'},
       {path: '/video', name: '时光', component: 'Video'},
       {path: '/dad', name: '点滴', component: 'DAD'}
     ];
