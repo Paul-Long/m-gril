@@ -1,4 +1,4 @@
-import Image from './Image/Image';
+import Image from './Image';
 import Button from './Button';
 import Pagination from './Pagination';
 import Mask from './Mask';

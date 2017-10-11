@@ -4,7 +4,7 @@ import classNames from 'classnames';
 class Input extends React.Component {
   getClassName = () => {
     const {className} = this.props;
-    return classNames('ym-input', className);
+    return classNames('cc-input', className);
   };
   onChange = (e) => {
     const {onChange} = this.props;

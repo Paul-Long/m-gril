@@ -1,14 +1,37 @@
 .ym-home {
-  .ym-layout-content {
+  .@{cc}-layout-content {
     .ym-show-video {
       height: 500px;
       background-color: bisque;
+      .flex-row;
+      .show-video-play, .show-video-list {
+        height: 100%;
+      }
+      .show-video-play {
+        .flex-center;
+        width: calc(~'100%' - 300px);
+        background-color: aquamarine;
+      }
+      .show-video-list {
+        width: 300px;
+        background-color: #108ee9;
+      }
+      margin-bottom: 30px;
     }
     .ym-show-photo {
       display: flex;
       flex-wrap: wrap;
       width: 100%;
       background-color: coral;
+      & > .@{cc}-image {
+        max-width: calc(~"33%" - 20px);
+        max-height: calc(~"33.333333%" - 20px);
+        margin: 10px;
+        img {
+          max-width: 100%;
+          max-height: 100%;
+        }
+      }
     }
   }
 }

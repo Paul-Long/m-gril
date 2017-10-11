@@ -4,7 +4,7 @@ import ClassNames from 'classnames';
 class Header extends React.Component {
   render(props) {
     const {className = '', children} = props;
-    const cn = ClassNames(['ym-layout-header', className]);
+    const cn = ClassNames(['cc-layout-header', className]);
     return (
       <div className={cn}>
         {children}

@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Button from '../Button';
 import {shouldUpdate} from 'util/reactUtil';
 
+const CC_PAGINATION = 'cc-pagination';
 class Pagination extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +18,7 @@ class Pagination extends React.Component {
   }
   getClassName = () => {
     const {className} = this.props;
-    return classNames('ym-pagination', className);
+    return classNames(CC_PAGINATION, className);
   };
   renderPageNumber = () => {
     const {total, current} = this.state;
@@ -41,7 +42,7 @@ class Pagination extends React.Component {
     return (
       <div {...props}>
         <Button>上一页</Button>
-        <div className='ym-pagination-num'>
+        <div className={`${CC_PAGINATION}-num`}>
           {this.renderPageNumber()}
         </div>
         <Button>下一页</Button>

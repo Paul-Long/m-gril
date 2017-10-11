@@ -1,6 +1,7 @@
 import React, {h} from 'react';
 import classNames from 'classnames';
 
+const CC_MASK = 'cc-mask';
 class Mask extends React.Component {
   handleClick = (e) => {
     const {onClick} = this.props;
@@ -10,11 +11,11 @@ class Mask extends React.Component {
   render() {
     const {children, className} = this.props;
     const props = {
-      className: classNames('ym-mask', className)
+      className: classNames(CC_MASK, className)
     };
     return (
       <div {...props}>
-        <div className='ym-mask-content' onClick={this.handleClick}>
+        <div className={`${CC_MASK}-content`} onClick={this.handleClick}>
           <div onClick={e => e.stopPropagation()}>
             {children}
           </div>
