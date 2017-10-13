@@ -2,8 +2,8 @@ import React, {h} from 'react';
 import ClassNames from 'classnames';
 
 class Layout extends React.Component {
-  render(props) {
-    const {className = '', children} = props;
+  render() {
+    const {className = '', children} = this.props;
     const cn = ClassNames(['cc-layout', className]);
     return (
       <div className={cn}>

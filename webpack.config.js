@@ -14,7 +14,7 @@ const client = 'src/client';
 const config = {
   entry: {
     main: path.join(__dirname, 'src/client/app.js'),
-    vendor: ['preact', 'preact-redux', 'redux']
+    vendor: ['react']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -23,9 +23,6 @@ const config = {
   },
   resolve: {
     alias: {
-      'react': 'preact-compat',
-      'react-dom': 'preact-compat',
-      'react-redux': 'preact-compat',
       'components': path.resolve(__dirname, client, 'components'),
       'util': path.resolve(__dirname, client, 'util'),
       'theme': path.resolve(__dirname, client, 'theme'),

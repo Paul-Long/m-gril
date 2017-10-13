@@ -28,8 +28,8 @@ class Moment extends React.Component {
     ))
   };
 
-  render(props, state) {
-    const {showView} = state;
+  render() {
+    const {showView} = this.state;
     return (
       <div className='ym-moment'>
         <div className='ym-moment-header'>

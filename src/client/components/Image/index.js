@@ -1,8 +1,8 @@
 import React, {h} from 'react';
 
 class Image extends React.Component {
-  render(props) {
-    const {width, height, onClick} = props;
+  render() {
+    const {width, height, onClick} = this.props;
     const imgProps = {
       src: src
     };

@@ -1,5 +1,5 @@
 import React, {h} from 'react';
-import {Provider} from 'preact-redux';
+import {Provider} from 'react-redux';
 import ReactDOM from 'react-dom';
 import createSagaMiddleware from 'redux-saga';
 import {applyMiddleware, compose, createStore} from 'redux';

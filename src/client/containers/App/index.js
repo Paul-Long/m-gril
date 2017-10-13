@@ -1,10 +1,10 @@
-import React, {h} from 'react';
+import React from 'react';
 import Header from './Header';
 import 'theme/styles/style.less';
 
 class App extends React.Component {
-  render(props) {
-    const {menus = [], children} = props;
+  render() {
+    const {menus = [], children} = this.props;
     return (
       <div className='ym-app'>
         <Header menus={menus} />

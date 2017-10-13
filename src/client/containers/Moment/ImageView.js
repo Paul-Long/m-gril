@@ -3,8 +3,8 @@ import Mask from 'components/Mask';
 import Image from 'components/Image';
 
 class ImageView extends React.Component {
-  render(props) {
-    const {onClick} = props;
+  render() {
+    const {onClick} = this.props;
     return (
       <Mask onClick={onClick}>
         <Image />
