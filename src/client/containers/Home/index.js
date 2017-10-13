@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Layout from 'components/Layout';
 import ShowPhoto from './ShowPhoto';
-import ShowVideo from './ShowVideo';
+import ShowVideo from './video';
 
 class Home extends React.Component {
   render() {
