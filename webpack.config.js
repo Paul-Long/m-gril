@@ -8,13 +8,14 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const happyThreadPool = HappyPack.ThreadPool({size: cpus});
 const UglifyParallel = require('webpack-uglify-parallel');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const CleanPlugin = require('clean-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 const client = 'src/client';
 const config = {
   entry: {
     main: path.join(__dirname, 'src/client/app.js'),
-    vendor: ['react']
+    vendor: ['react', 'react-dom', 'react-router-dom']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -55,9 +56,23 @@ const config = {
     ]
   },
   plugins: [
+    new WebpackMd5Hash(),
     new CaseSensitivePathsPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin(),
+    new CleanPlugin([path.resolve(__dirname, 'dist')], {verbose: true}),
     new ExtractTextPlugin('[name].[contenthash:8].css', {allChunks: true}),
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.optimize.LimitChunkCountPlugin({maxChunks: 10}),
+    new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10240}),
+    new webpack.optimize.OccurrenceOrderPlugin,
+    new webpack.optimize.CommonsChunkPlugin({name: 'common', chunks: ['main', 'vendor']}),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      filename: 'manifest.[hash:8].[id].js',
+      minChunks: Infinity
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(ENV)
+    }),
     new HappyPack({
       id: 'js',
       threadPool: happyThreadPool,
@@ -79,24 +94,12 @@ const config = {
         const order2 = order.indexOf(chunk2.names[0]);
         return order1 - order2;
       }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({name: 'common', chunks: ['main', 'vendor']}),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      filename: 'manifest.[hash:8].[id].js',
-      minChunks: Infinity
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin,
-    new WebpackMd5Hash(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(ENV)
     })
   ]
 };
 if (ENV === 'develpoment') {
   config.devtool = 'eval-source-map';
   config.entry.main = ['webpack-hot-middleware/client?reload=true', path.join(__dirname, 'src/client/app.js')];
-  config.output.path = path.resolve(__dirname, 'build');
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 
